@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Hello! This is the Home Page</h1>
+    <button id="logoutBtn" type="button">Logout</button>
+
+    <script>
+        // Function to handle logout
+        function logout() {
+            fetch('/logout', {
+                method: 'GET',
+                credentials: 'same-origin' // Include cookies in the request
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to login page or perform any other action upon successful logout
+                    window.location.href = '/login';
+                } else {
+                    console.error('Failed to logout:', response.statusText);
+                    // Handle error
+                }
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+                // Handle error
+            });
+        }
+
+        // Attach click event listener to logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', logout);
+    </script>
+</body>
+</html>
